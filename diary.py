@@ -35,24 +35,24 @@ def prepare_schema(conn):
         )
     ''')
 
-def insert_diary_record(conn, username,country,place,date_from,date_to,text):
+def insert_diary_record(username,country,place,date_from,date_to,text):
     """
     Inserts diary record to the databaze table diary_records.
     Parametr destination must be filled in.
     """
-    if not username:
-        return
+    conn = get_conn()
     c=conn.cursor()
     c.execute(
         "INSERT INTO diary_records (username,country,place,date_from,date_to,text) VALUES (?,?,?,?,?,?)",
         (username,country,place,date_from,date_to,text))
     conn.commit()
 
-def list_diary_records_all(conn):
+def list_diary_records_all():
     """
     returns all diary_records in the databaze
     return value is a list of dicts.
     """
+    conn = get_conn()
     c=conn.cursor()
     c.execute('''
         SELECT * FROM DIARY_RECORDS
@@ -70,11 +70,12 @@ def list_diary_records_all(conn):
         })
     return diary_records
 
-def list_diary_records_countries(conn, country):
+def list_diary_records_countries(country):
     """
     returns diary_records in the databaze to chosen country
     return value is a list of dicts.
     """
+    conn = get_conn()
     c=conn.cursor()
     c.execute('''
         SELECT * FROM DIARY_RECORDS WHERE COUNTRY = ?''',(country,))
@@ -91,22 +92,24 @@ def list_diary_records_countries(conn, country):
         })
     return diary_records
 
-def list_diary_records_username (conn,username):
+def list_diary_records_username (username):
     """
     returns all diary records made by logged in owner
     :param conn:
     :param owner:
     :return:
     """
+    conn = get_conn()
     c = conn.cursor()
 
-def list_diary_records_random (conn):
+def list_diary_records_random ():
     """
     returns one diary record chosen randomly
     :param conn:
     :param owner:
     :return:
     """
+    conn = get_conn()
     c = conn.cursor()
     diary_record = c.execute('''
             SELECT * FROM DIARY_RECORDS ORDER BY RANDOM() LIMIT 1
