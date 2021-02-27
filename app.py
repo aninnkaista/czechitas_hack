@@ -4,6 +4,7 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from help_functions import apology
 
 import sqlite3
+import diary
 
 # Configure application
 app = Flask(__name__)
@@ -12,7 +13,6 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Configure database
-
 
 # Ensure responses aren't cached
 @app.after_request
@@ -27,14 +27,23 @@ app.secret_key = "546546541534165341"
 
 @app.route("/", methods=["GET"])
 def index():
-    diary_records = []
+    diary_records = diary.list_diary_records_all()
     return render_template("dashboard.html", diary_records = diary_records)
 
-@app.route("/new_form", methods=["GET", "POST"])
+@app.route("/form", methods=["GET", "POST"])
 def new_form():
     if request.method == "POST":
+        record_items = ["username", "country", "date_from", "date_to", "text", "place"]
         new_record = []
+        # to get items from user form
+        for record_item in record_items:
+            if not request.form.get(record_item):
+                return apology("no " + record_item + " provided", 403)
+            else:
+                new_record.append(request.form.get(record_item))
+        diary.insert_diary_record(*new_record)
         return redirect("/")
+    
     elif request.method == "GET":
         return render_template("form.html")
 

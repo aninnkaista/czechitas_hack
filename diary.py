@@ -35,24 +35,24 @@ def prepare_schema(conn):
         )
     ''')
 
-def insert_diary_record(conn, username,country,place,date_from,date_to,text):
+def insert_diary_record(username,country,place,date_from,date_to,text):
     """
     Inserts diary record to the databaze table diary_records.
     Parametr destination must be filled in.
     """
-    if not username:
-        return
+    conn = get_conn()
     c=conn.cursor()
     c.execute(
         "INSERT INTO diary_records (username,country,place,date_from,date_to,text) VALUES (?,?,?,?,?,?)",
         (username,country,place,date_from,date_to,text))
     conn.commit()
 
-def list_diary_records_all(conn):
+def list_diary_records_all():
     """
     returns all diary_records in the databaze
     return value is a list of dicts.
     """
+    conn = get_conn()
     c=conn.cursor()
     c.execute('''
         SELECT * FROM DIARY_RECORDS
@@ -122,6 +122,4 @@ place = "california"
 date1=datetime.date.today()
 date2=datetime.date.today()
 text = "prvni vylet do ameriky"
-insert_diary_record(conn,name,zeme,place,date1,date2,text)
-print (list_diary_records_all(conn))
-print (list_diary_records_random(conn))
+
