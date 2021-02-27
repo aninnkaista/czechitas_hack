@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>Diary</span>
+    {% extends "layout.html" %} {% block title %} Dashboard {% endblock %} {% block main %}
+    <table>
+        <thead id='row-upper'>
+            <th class='username'>Username</th>
+            <th class='country'>Country</th>
+            <th class='place'>Place</th>
+            <th class='date-from'>From</th>
+            <th class='date-to'>To</th>
+            <th class='text'>Text</th>
+        </thead>
+        <tbody id='row-next'>
+            {% for record in diary_records %}
+            <tr>
+                <td>{{ record['username'] }}</td>
+                <td>{{ record['country'] }}</td>
+                <td>{{ record['place'] }}</td>
+                <td>{{ record['date_from'] }}</td>
+                <td>{{ record['date_to'] }}</td>
+                <td>{{ record['text'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> <br>
+    {% endblock %}
+    <a class='form-link' href='/form'>Add new record</a>
+</body>
+</html>
