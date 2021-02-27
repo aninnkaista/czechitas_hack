@@ -1,4 +1,6 @@
 import sqlite3
+import datetime
+from datetime import date
 
 db_path = 'databaze.db'
 
@@ -24,7 +26,7 @@ def prepare_schema(conn):
     c.execute('''
         CREATE TABLE IF NOT EXISTS diary_records (
             id INTEGER PRIMARY KEY,
-            username TEXT
+            username TEXT,
             country TEXT,
             place TEXT,
             date_from DATE,
@@ -42,8 +44,8 @@ def insert_diary_record(conn, username,country,place,date_from,date_to,text):
         return
     c=conn.cursor()
     c.execute(
-        "INSERT INTO diary_records (username,country,place,date_from,date_to,text) VALUES (?,?,?)",
-        (owner,username,country,place,date_from,date_to,text))
+        "INSERT INTO diary_records (username,country,place,date_from,date_to,text) VALUES (?,?,?,?,?,?)",
+        (username,country,place,date_from,date_to,text))
     conn.commit()
 
 def list_diary_records_all(conn):
@@ -111,3 +113,14 @@ def list_diary_records_random (conn):
             SELECT * FROM DIARY_RECORDS ORDER BY RANDOM() LIMIT 1
         ''')
     return diary_record
+
+conn=get_conn()
+prepare_schema(conn)
+name = "hanja"
+zeme = "usa"
+place = "california"
+date1=datetime.date.today()
+date2=datetime.date.today()
+text = "prvni vylet do ameriky"
+insert_diary_record(conn,name,zeme,place,date1,date2,text)
+print (list_diary_records_all(conn))
