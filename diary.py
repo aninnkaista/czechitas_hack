@@ -28,7 +28,8 @@ def prepare_schema(conn):
             country TEXT,
             place TEXT,
             date_from DATE,
-            date_to DATE
+            date_to DATE,
+            text TEXT
         )
     ''')
 
@@ -67,6 +68,28 @@ def list_diary_records_all(conn):
         })
     return diary_records
 
+def list_diary_records_countries(conn, country):
+    """
+    returns diary_records in the databaze to chosen country
+    return value is a list of dicts.
+    """
+    c=conn.cursor()
+    c.execute('''
+        SELECT * FROM DIARY_RECORDS WHERE COUNTRY = "country"
+    ''')
+    diary_records = []
+    for row in c:
+        diary_records.append({
+            "id":row[0],
+            "username":row[1],
+            "country":row[2],
+            "place":row[3],
+            "date_from":row[4],
+            "date_to":row[5],
+            "text":row[6]
+        })
+    return diary_records
+
 def list_diary_records_username (conn,username):
     """
     returns all diary records made by logged in owner
@@ -78,13 +101,13 @@ def list_diary_records_username (conn,username):
 
 def list_diary_records_random (conn):
     """
-    returns one diary record my by someone else than logged owner
-    the record is chosen randomly
+    returns one diary record chosen randomly
     :param conn:
     :param owner:
     :return:
     """
     c = conn.cursor()
-    selected_diary_records= c.execute('''
+    diary_record = c.execute('''
             SELECT * FROM DIARY_RECORDS ORDER BY RANDOM() LIMIT 1
         ''')
+    return diary_record
