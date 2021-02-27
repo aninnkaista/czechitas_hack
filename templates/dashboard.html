@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% block title %} Dashboard {% endblock %} {% block main %}
+<table>
+    <thead>
+        <th>Username</th>
+        <th>Country</th>
+        <th>Place</th>
+        <th>Date_from</th>
+        <th>Date_to</th>
+        <th>Text</th>
+    </thead>
+    <tbody>
+        {% for record in diary_records %}
+        <tr>
+            <td>{{ record['username'] }}</td>
+            <td>{{ record['country'] }}</td>
+            <td>{{ record['place'] }}</td>
+            <td>{{ record['date_from'] }}</td>
+            <td>{{ record['date_to'] }}</td>
+            <td>{{ record['text'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
