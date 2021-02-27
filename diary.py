@@ -77,8 +77,7 @@ def list_diary_records_countries(conn, country):
     """
     c=conn.cursor()
     c.execute('''
-        SELECT * FROM DIARY_RECORDS WHERE COUNTRY = "country"
-    ''')
+        SELECT * FROM DIARY_RECORDS WHERE COUNTRY = ?''',(country,))
     diary_records = []
     for row in c:
         diary_records.append({
@@ -112,7 +111,19 @@ def list_diary_records_random (conn):
     diary_record = c.execute('''
             SELECT * FROM DIARY_RECORDS ORDER BY RANDOM() LIMIT 1
         ''')
-    return diary_record
+    diary_records = []
+    for row in c:
+        diary_records.append({
+            "id":row[0],
+            "username":row[1],
+            "country":row[2],
+            "place":row[3],
+            "date_from":row[4],
+            "date_to":row[5],
+            "text":row[6]
+        })
+    return diary_records
+
 
 conn=get_conn()
 prepare_schema(conn)
@@ -122,6 +133,7 @@ place = "california"
 date1=datetime.date.today()
 date2=datetime.date.today()
 text = "prvni vylet do ameriky"
-insert_diary_record(conn,name,zeme,place,date1,date2,text)
-print (list_diary_records_all(conn))
+#insert_diary_record(conn,name,zeme,place,date1,date2,text)
+#print (list_diary_records_all(conn))
+#print (list_diary_records_countries(conn,zeme))
 print (list_diary_records_random(conn))
