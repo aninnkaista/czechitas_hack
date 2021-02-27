@@ -124,3 +124,4 @@ date2=datetime.date.today()
 text = "prvni vylet do ameriky"
 insert_diary_record(conn,name,zeme,place,date1,date2,text)
 print (list_diary_records_all(conn))
+print (list_diary_records_random(conn))
