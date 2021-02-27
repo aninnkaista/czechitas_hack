@@ -47,6 +47,11 @@ def new_form():
     elif request.method == "GET":
         return render_template("form.html")
 
+@app.route("/random", methods=["GET"])
+def random():
+    diary_records = diary.list_diary_records_random()
+    return render_template("dashboard.html", diary_records=diary_records)
+
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):

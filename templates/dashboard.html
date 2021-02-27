@@ -19,31 +19,108 @@
         }
     }
 </script>
-<div class="form-group">
-    <input type="text" id="UserInput" onkeyup="SearchCountry()" class="form-control input-lg" autocomplete="off" name="input" placeholder="Select country" autofocus>
+<style>
+    body {
+        background-color: rgb(240, 234, 234);
+        padding-bottom: 50px;
+    }
+    
+    .header {
+        background-color: #FAC905;
+        color: #FFFFFF;
+        padding: 30px 0 30px 50px;
+        margin-bottom: 30px;
+    }
+    
+    table {
+        background-color: #FFFFFF;
+        max-height: 700px;
+    }
+    
+    .btn-primary {
+        background-color: #FF491F;
+        color: #FFFFFF;
+        padding: 10px 100px 10px 100px;
+        margin: 0 0 50px 80px;
+        border: none;
+    }
+    
+    .intro {
+        margin: 0 0 40px 80px;
+    }
+    
+    .random {
+        max-width: 800px;
+        margin-left: 80px;
+    }
+    
+    .filter {
+        max-width: 800px;
+    }
+    
+    .intro-description {
+        max-width: 800px;
+    }
+    
+    .photos img {
+        width: 400px;
+    }
+    
+    .table_margin {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+</style>
+<div class='intro'>
+    <h1>Travelling Diary</h1>
+    <div class='intro-description'>
+        <p>This travel diary aplication has two main features:</p>
+        <ul>
+            <li>it serves as a place, where you can record details of your travel in a clear structure so that you can cupture your travel experience</li>
+            <li>it also provides inspiration for other travelers - they can go through all the travel diaries to seek information and recommendations from other travelers about destinations
+            </li>
+        </ul>
+    </div>
+
+    <div class='photos'>
+        <img src="static/images/pexels-andrei-tanase-1271619.jpg">
+        <img src="static/images/pexels-rachel-claire-4992793.jpg">
+        <img src="static/images/pexels-vanessa-garcia-6324131.jpg">
+    </div>
 </div>
-<table class='table' id="Diary_records">
-    <thead>
-        <th>Username</th>
-        <th>Country</th>
-        <th>Place</th>
-        <th>Date_from</th>
-        <th>Date_to</th>
-        <th>Text</th>
-    </thead>
-    <tbody>
-        {% for record in diary_records %}
-        <tr>
-            <td>{{ record['username'] }}</td>
-            <td>{{ record['country'] }}</td>
-            <td>{{ record['place'] }}</td>
-            <td>{{ record['date_from'] }}</td>
-            <td>{{ record['date_to'] }}</td>
-            <td>{{ record['text'] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a class='form-link ' href='/form '><input type='submit ' class='btn btn-primary ' value='Add New Record '></a>
+<div class="table_margin">
+    <div class="form-group">
+        <h2>Travelling Records</h2>
+        <p class='filter'>Did you choose your travel destination and want some inspiration what to do there? Look at travel diaries and read reccomendations from other traveler! Just filter travel diaries according to countries!</p>
+        <input type="text" id="UserInput" onkeyup="SearchCountry()" class="form-control input-lg" autocomplete="off" name="input" placeholder="Select country" autofocus>
+    </div>
+    <table class='table' id="Diary_records">
+        <thead>
+            <th>Username</th>
+            <th>Country</th>
+            <th>Place</th>
+            <th>Date_from</th>
+            <th>Date_to</th>
+            <th>Text</th>
+        </thead>
+        <tbody>
+            {% for record in diary_records %}
+            <tr>
+                <td>{{ record['username'] }}</td>
+                <td>{{ record['country'] }}</td>
+                <td>{{ record['place'] }}</td>
+                <td>{{ record['date_from'] }}</td>
+                <td>{{ record['date_to'] }}</td>
+                <td>{{ record['text'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p class='random'>You don't know where to travel? Nevermind, just click on the button bellow, we will randomly select destination for you! you can go throuhg the travel diaries from selected destination and decide if it suits you!</p>
+<a class='form-link' href='/form'><input type='submit' class='btn btn-primary' value='Add New Record'></a>
+<a class='form-link' href='/random'><input type='submit' class='btn btn-primary' value='Choose Destination Randomly'></a>
+<a class='form-link' href='/'><input type='submit' class='btn btn-primary' value='Show All Records'></a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
 {% endblock %}
