@@ -1,5 +1,29 @@
 {% extends "layout.html" %} {% block title %} Dashboard {% endblock %} {% block main %}
-<table>
+<script>
+    function SearchCountry() {
+  var input, filter, table, tr, td, x;
+  input = document.getElementById("UserInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("Diary_records");
+  tr = table.getElementsByTagName("tr");
+
+  for (x = 0; x < tr.length; x++) {
+    td = tr[x].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[x].style.display = "";
+      }
+      else {
+        tr[x].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+<div class="form-group">
+    <input type="text" id="UserInput" onkeyup="SearchCountry()" class="form-control input-lg" autocomplete="off" name="input" placeholder="Select country" autofocus>
+</div>
+<table id="Diary_records">
     <thead>
         <th>Username</th>
         <th>Country</th>
@@ -21,5 +45,4 @@
         {% endfor %}
     </tbody>
 </table>
-
-<a class="abx" href="/form">New_form</a> {% endblock %}
+{% endblock %}
