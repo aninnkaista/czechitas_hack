@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <form action = "/form" method = "post">
-        <span>Diary</span>
+{% extends "layout.html" %}{% block title %}New form{% endblock %}{% block main %}
+<div class='window'>
+    <form action="/form" method="post">
         <h1>New Diary Record</h1>
-        <input type="text" name="username" placeholder='Username' class='field' id="form-field" value=""> <br>
-        <select name="country" name="country"  placeholder='Country' class='field' id="form-field">
-        <option value="ostatní">Angola</option>
-        <option value="ostatní">Canada</option>
-        <option value="Česká republika">Czech Republic</option>
-        <option value="ostatní">Great Britain</option>
-        <option value="USA">Italy</option>
-        <option value="ostatní">Japan</option>
-        <option value="ostatní">Russia</option>
-        <option value="Slovensko">Slovakia</option>
-        <option value="Evropská unie">US</option>
+        <input type="text" name="username" placeholder='Username' class='field form-control' id="form-field" value=""> <br>
+        <select name="country" placeholder='Country' class=' field form-select' id="form-field">
+        <option value="Angola">Angola</option>
+        <option value="Canada">Canada</option>
+        <option value="Czech Republic">Czech Republic</option>
+        <option value="Great Britain">Great Britain</option>
+        <option value="Italy">Italy</option>
+        <option value="Japan">Japan</option>
+        <option value="Russia">Russia</option>
+        <option value="Slovakia">Slovakia</option>
+        <option value="US">US</option>
         </select> <br>
-        <input type="text" name="place" placeholder='Place' class='field' id="form-field" value=""> <br>
-        <label>Date from:</label> <input type="date" name="date_from" class='field' id="date-form" value="2021-02-27">
-        <label>Date to:</label> <input type="date" name="date_to" class='field' id="date-form" value="2021-02-27"> <br>
-        <input type="text" name="text" placeholder='Tell us something about your experience' class='field' id="form-field" value=""> <br>
-        <input type='submit' placeholder='Submit' value='SUBMIT'>
+        <input type="text" name="place" placeholder='Place' class='field form-control' id="form-field" value=""> <br>
+        <label>Date from:</label> <input type="date" name="date_from" class='date form-control' id="date-form" value="2021-02-27">
+        <label>Date to:</label> <input type="date" name="date_to" class='date form-control' id="date-form" value="2021-02-27"><br>
+        <input type="text" name="text" placeholder='Tell us something about your experience' class='field form-control' id="form-field" value=""> <br>
+        <input type='submit' placeholder='Submit' class='btn btn-primary' value='SUBMIT'>
     </form>
-
-</body>
-
-</html>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+{% endblock %}

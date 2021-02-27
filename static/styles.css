@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(240, 234, 234);
+    padding-bottom: 50px;
+}
+
+.header {
+    background-color: #FAC905;
+    color: #FFFFFF;
+    padding: 30px 0 30px 50px;
+    margin-bottom: 30px;
+}
+
+table {
+    background-color: #FFFFFF;
+    border-radius: 3%;
+    max-height: 700px;
+}
+
+.btn-primary {
+    background-color: #FF491F;
+    color: #FFFFFF;
+    padding: 10px 100px 10px 100px;
+    margin-bottom: 50px;
+    border: none;
+}
+
+h1 {
+    margin: 30px 0 50px 0;
+}
+
+.window {
+    background-color: #FFFFFF;
+    padding: 30px;
+    position: relative;
+    width: 800px;
+    height: auto;
+    margin: auto;
+    padding-top: 50px;
+    border-radius: 3%;
+}
+
+.field,
+.form-control {
+    background: #FFFFFF;
+    box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.0588942);
+    margin-bottom: 10px;
+}
+
+label {
+    padding-bottom: 10px;
+}

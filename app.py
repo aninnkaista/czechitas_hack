@@ -33,7 +33,7 @@ def index():
 @app.route("/form", methods=["GET", "POST"])
 def new_form():
     if request.method == "POST":
-        record_items = ["username", "country", "date_from", "date_to", "text", "place"]
+        record_items = ["username", "country", "place", "date_from", "date_to", "text"]
         new_record = []
         # to get items from user form
         for record_item in record_items:
