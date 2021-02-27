@@ -24,25 +24,25 @@ def prepare_schema(conn):
     c.execute('''
         CREATE TABLE IF NOT EXISTS diary_records (
             id INTEGER PRIMARY KEY,
-            owner TEXT
-            destination TEXT,
-            description TEXT,
-            start_date DATE,
-            end_date DATE
+            username TEXT
+            country TEXT,
+            place TEXT,
+            date_from DATE,
+            date_to DATE
         )
     ''')
 
-def insert_diary_record(conn, owner,destination,descritption,start_date,end_date):
+def insert_diary_record(conn, username,country,place,date_from,date_to,text):
     """
     Inserts diary record to the databaze table diary_records.
     Parametr destination must be filled in.
     """
-    if not destination:
+    if not username:
         return
     c=conn.cursor()
     c.execute(
-        "INSERT INTO diary_records (owner,destination, description,start_date,end_date) VALUES (?,?,?)",
-        (owner,destination,description,start_date,end_date))
+        "INSERT INTO diary_records (username,country,place,date_from,date_to,text) VALUES (?,?,?)",
+        (owner,username,country,place,date_from,date_to,text))
     conn.commit()
 
 def list_diary_records_all(conn):
@@ -52,16 +52,39 @@ def list_diary_records_all(conn):
     """
     c=conn.cursor()
     c.execute('''
-        SELECT * FROM DESTINATIONS
+        SELECT * FROM DIARY_RECORDS
     ''')
     diary_records = []
     for row in c:
         diary_records.append({
             "id":row[0],
-            "owner":row[1],
-            "destination":row[2],
-            "start_date":row[3],
-            "end_date":row[4]
+            "username":row[1],
+            "country":row[2],
+            "place":row[3],
+            "date_from":row[4],
+            "date_to":row[5],
+            "text":row[6]
         })
     return diary_records
 
+def list_diary_records_username (conn,username):
+    """
+    returns all diary records made by logged in owner
+    :param conn:
+    :param owner:
+    :return:
+    """
+    c = conn.cursor()
+
+def list_diary_records_random (conn):
+    """
+    returns one diary record my by someone else than logged owner
+    the record is chosen randomly
+    :param conn:
+    :param owner:
+    :return:
+    """
+    c = conn.cursor()
+    selected_diary_records= c.execute('''
+            SELECT * FROM DIARY_RECORDS ORDER BY RANDOM() LIMIT 1
+        ''')
