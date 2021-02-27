@@ -123,17 +123,3 @@ def list_diary_records_random (conn):
             "text":row[6]
         })
     return diary_records
-
-
-conn=get_conn()
-prepare_schema(conn)
-name = "hanja"
-zeme = "usa"
-place = "california"
-date1=datetime.date.today()
-date2=datetime.date.today()
-text = "prvni vylet do ameriky"
-#insert_diary_record(conn,name,zeme,place,date1,date2,text)
-#print (list_diary_records_all(conn))
-#print (list_diary_records_countries(conn,zeme))
-print (list_diary_records_random(conn))
